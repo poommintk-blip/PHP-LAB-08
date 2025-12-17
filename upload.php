@@ -1,41 +1,52 @@
 <?php
-$target_dir = "?????"; //กำหนดที่อยู่ในการเก็บรูป
+$target_dir = "uploads/"; // โฟลเดอร์เก็บไฟล์
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 
+if (file_exists($target_file)) {
+    echo "ไฟล์นี้มีอยู่แล้วในระบบ<br>";
+    $uploadOk = 0;
+}
 
-//เพิ่มโค้ดตรวจสอบไฟล์ที่อัพโหลดไปแล้ว
+if ($_FILES["fileToUpload"]["size"] > 51200) {
+    echo "ไฟล์มีขนาดเกิน 50 KB<br>";
+    $uploadOk = 0;
+}
 
-
-
-//เพิ่มโค้ดตรวจสอบขนาดไฟล์
-
-
-
-//เพิ่มโค้ดตรวจสอบนามสกุลไฟล์
-
+if (
+    $imageFileType != "gif" &&
+    $imageFileType != "jpeg" &&
+    $imageFileType != "txt" &&
+    $imageFileType != "docx"
+) {
+    echo "อนุญาตเฉพาะไฟล์ GIF, JPEG, TXT, DOCX เท่านั้น<br>";
+    $uploadOk = 0;
+}
 
 
 if ($uploadOk == 0) {
-  
+    echo "ไม่สามารถอัปโหลดไฟล์ได้";
 } else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    
 
-  //เพิ่มโค้ดแสดงรายละเอียดของไฟล์ที่อัพโหลด
-    echo "Your File Was Upload Successfully."."<br><br><br>";
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+        echo "อัปโหลดไฟล์สำเร็จ<br><br>";
 
 
-    echo " ";              //แสดงชื่อไฟล์
-    echo " ";                   //แสดงนามสกุลไฟล์
-    echo " ";          //แสดงขนาดไฟล์
-    echo " ";      //แสดงที่อยู่ของไฟล์
-    echo " ";      //แสดงรูปภาพ
+        echo "File Name : " . basename($_FILES["fileToUpload"]["name"]) . "<br>";
+        echo "File Type : " . $imageFileType . "<br>";
+        echo "File Size : " . $_FILES["fileToUpload"]["size"] . " bytes<br>";
+        echo "File Path : " . $target_file . "<br><br>";
 
-  } else {
-    echo "Sorry, there was an error uploading your file."."<br />";
-  }
+
+        if ($imageFileType == "gif" || $imageFileType == "jpeg") {
+            echo "<img src='$target_file' width='300'>";
+        }
+
+    } else {
+        echo "เกิดข้อผิดพลาดในการอัปโหลดไฟล์";
+    }
 }
 ?>

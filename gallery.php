@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +15,16 @@
       <i class="fas fa-light fa-images"></i>
       <i class="fas fa-grin-wink"></i>
     </div>
-
     <!-- สร้างฟอร์มอัพโหลดที่นี่ -->
+
+      <form action="upload_image.php"
+            method="post" enctype="multipart/form-
+data">
+          <label for="file1">Filename:</label>
+          <input type="file" name="file1" id="file1" />
+          <br />
+          <input type="submit" value="Submit">
+      </form>
 
   </div>
 </body>
