@@ -18,8 +18,8 @@ $mail = new PHPMailer;
 $mail->isSMTP();                            
 $mail->Host = 'smtp.gmail.com';           
 $mail->SMTPAuth = true;                     
-$mail->Username = '????????????';       //อีเมล์ผู้ส่ง
-$mail->Password = '??????????';         //รหัสผ่าน
+$mail->Username = 'yourmail@gmail.com';       //อีเมล์ผู้ส่ง
+$mail->Password = 'your_app_password';         //รหัสผ่าน
 $mail->SMTPSecure = 'ssl';                  
 $mail->Port = 465; 
 
@@ -36,16 +36,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->isHTML(true); 
    
     // อีเมล์และชื่อผู้ส่ง
-    $mail->setFrom('????',?????? ); 
+    $mail->setFrom($email, $name);
     
     //อีมล์ผู้รับ
-    $mail->addAddress (????);
+    $mail->addAddress ('yourmail@gmail.com');
 
     //หัวเรื่องอีเมล์
-    $mail->Subject = ????; 
+    $mail->Subject = $header;
     
     //รายละเอียดอีเมล์
-    $mail->Body  = '<h2 style="color:Tomato;">' . ???? .'</h2>'; 
+    $mail->Body  = '<h2 style="color:Tomato;">' . $detail .'</h2>';
     
     
     if(!$mail->send()) { 
