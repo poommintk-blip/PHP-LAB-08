@@ -58,13 +58,16 @@
       <i class="fas fa-grin-wink"></i>
     </div>
      <!-- สร้างฟอร์มอัพโหลดที่นี่ -->
+      <div class="box"
       <form action="upload.php" method="post" enctype="multipart/form-data">
           <label for="file">Filename:</label>
           <input type="file" name="file" id="file" />
           <br />
           <input type="submit" value="Submit">
       </form> 
+      </div> 
 
   </div>
 </body>
 </html>
+
