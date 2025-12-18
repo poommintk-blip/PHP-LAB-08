@@ -1,6 +1,6 @@
 <?php
 $target_dir = "uploads/"; // โฟลเดอร์เก็บไฟล์
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . basename($_FILES["file1"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -10,7 +10,7 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 
-if ($_FILES["fileToUpload"]["size"] > 51200) {
+if ($_FILES["file1"]["size"] > 51200) {
     echo "ไฟล์มีขนาดเกิน 50 KB<br>";
     $uploadOk = 0;
 }
@@ -30,14 +30,14 @@ if ($uploadOk == 0) {
     echo "ไม่สามารถอัปโหลดไฟล์ได้";
 } else {
 
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    if (move_uploaded_file($_FILES["file1"]["tmp_name"], $target_file)) {
 
         echo "อัปโหลดไฟล์สำเร็จ<br><br>";
 
 
-        echo "File Name : " . basename($_FILES["fileToUpload"]["name"]) . "<br>";
+        echo "File Name : " . basename($_FILES["file1"]["name"]) . "<br>";
         echo "File Type : " . $imageFileType . "<br>";
-        echo "File Size : " . $_FILES["fileToUpload"]["size"] . " bytes<br>";
+        echo "File Size : " . $_FILES["file1"]["size"] . " bytes<br>";
         echo "File Path : " . $target_file . "<br><br>";
 
 
