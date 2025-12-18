@@ -37,7 +37,7 @@ if ($uploadOk == 0) {
     echo "ไม่สามารถอัปโหลดไฟล์ได้";
 } else {
 
-    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+    if (move_uploaded_file($_FILES["file"]["name"], $target_file)) {
 
         echo "อัปโหลดไฟล์สำเร็จ<br><br>";
 
