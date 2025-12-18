@@ -59,16 +59,14 @@
     </div>
      <!-- สร้างฟอร์มอัพโหลดที่นี่ -->
       <div class="box">
-      <form action="upoad.php" method="post" enctype="multipart/form-data">
+      <form action="upload.php" method="post" enctype="multipart/form-data">
           <label for="file">Filename:</label>
-          <input type="file" name="file" id="file" />
+          <input type="file" name="fileToUpload" id="fileToUpload" />
           <br />
           <input type="submit" value="Submit">
       </form> 
-      </div> 
+    </div>
 
   </div>
 </body>
 </html>
-
-
