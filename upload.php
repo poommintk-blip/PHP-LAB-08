@@ -17,7 +17,7 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 
-if ($_FILES["file"]["size"] > 51200) {
+if ($_FILES["fileToUpload"]["size"] > 51200) {
     echo "ไฟล์มีขนาดเกิน 50 KB<br>";
     $uploadOk = 0;
 }
