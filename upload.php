@@ -1,59 +1,45 @@
-<style>
-        body {
-            background:#ffffff;
-            font-family: Arial;
-        }
-</style>
-
 <?php
-$target_dir = "images/"; // โฟลเดอร์เก็บไฟล์
+$target_dir = "images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-
+// ตรวจสอบไฟล์ที่อัพโหลดไปแล้ว
 if (file_exists($target_file)) {
-    echo "ไฟล์นี้มีอยู่แล้วในระบบ<br>";
+    echo "<h3 style='color:brown;'>ขออภัยคุณได้อัพโหลดไฟล์ซ้ำ.</h3>";
     $uploadOk = 0;
 }
 
+// ตรวจสอบขนาดไฟล์ (ไม่เกิน 50 KB = 51200 bytes)
 if ($_FILES["fileToUpload"]["size"] > 51200) {
-    echo "ไฟล์มีขนาดเกิน 50 KB<br>";
+    echo "<h3 style='color:brown;'>ไฟล์ Upload ต้องมีขนาดไม่เกิน 50 KB.</h3>";
     $uploadOk = 0;
 }
 
-if (
-    $imageFileType != "gif" &&
-    $imageFileType != "jpeg" &&
-    $imageFileType != "txt" &&
-    $imageFileType != "docx"
-) {
-    echo "อนุญาตเฉพาะไฟล์ GIF, JPEG, TXT, DOCX เท่านั้น<br>";
-    
-    if($uploadOk = 0){
-        echo "ไม่สามารถอัปโหลดไฟล์ได้";
-    }
-} else {
-
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
-        echo "อัปโหลดไฟล์สำเร็จ<br><br>";
-
-
-        echo "File Name : " . basename($_FILES["fileToUpload"]["name"]) . "<br>";
-        echo "File Type : " . $imageFileType . "<br>";
-        echo "File Size : " . $_FILES["fileToUpload"]["size"]/1024 . " Kb<br>";
-        echo "File Path : " . $target_file . "<br><br>";
-
-
-        if ($imageFileType == "gif" || $imageFileType == "jpeg") {
-            echo "<img src='$target_file' width='300'>";
-        }
-
-    } else {
-        echo "เกิดข้อผิดพลาดในการอัปโหลดไฟล์";
-    }
+// ตรวจสอบนามสกุลไฟล์
+if($imageFileType != "gif" && $imageFileType != "jpeg" && $imageFileType != "jpg" && $imageFileType != "txt" && $imageFileType != "docx") {
+    echo "<h3 style='color:brown;'>ไฟล์ Upload ต้องเป็นนามสกุล .jpeg .jpg .gif .txt หรือ .docx</h3>";
+    $uploadOk = 0;
 }
 
+if ($uploadOk == 0) {
+  // ไม่ทำอะไร ข้อความ error แสดงไปแล้วด้านบน
+} else {
+  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    
+    echo "Your File Was Upload Successfully."."<br><br>";
+    echo "File Name: " . $_FILES["fileToUpload"]["tmp_name"] . "<br>";
+    echo "Type: " . $_FILES["fileToUpload"]["type"] . "<br>";
+    echo "Size: " . $_FILES["fileToUpload"]["size"]/1024 . " Kb<br>";
+    echo "Stored in:" . $target_file . "<br><br>";
+    
+    // แสดงรูปภาพถ้าเป็นไฟล์รูป
+    if($imageFileType == "gif" || $imageFileType == "jpeg" || $imageFileType == "jpg") {
+        echo "<img src='" . $target_file . "' style='max-width:500px;' />";
+    }
 
+  } else {
+    echo "ขออภัย เกิดข้อผิดพลาดในการอัปโหลดไฟล์ของคุณ"."<br />";
+  }
+}
 ?>
