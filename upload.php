@@ -39,7 +39,7 @@ if ($uploadOk == 0) {
     }
 
   } else {
-    echo "ขออภัย เกิดข้อผิดพลาดในการอัปโหลดไฟล์ของคุณ"."<br />";
+    echo "Sorry, there was an error uploading your file."."<br />";
   }
 }
 ?>
